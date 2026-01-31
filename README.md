@@ -1,4 +1,6 @@
-# Learning objectives
+# todo_list_cousera
+
+## Learning objectives
 After completing this lab, you will be able to:
 
 - Create a simple Todo List application using React and add headings and associated lists to organize tasks.
