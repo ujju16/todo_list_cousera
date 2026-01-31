@@ -12,12 +12,15 @@ const TodoList = () => {
       setTodos([...todos, { heading: headingInput, lists: [] }]);//If the condition in the if statement is met, this line updates the state variable todos. It spreads the existing todos array (todos) into a new array using the spread syntax (…todos) and appends a new object to it. The new object contains a heading property set to the value of headingInput and a lists property initialized as an empty array.
       setHeadingInput('');//After adding a new todo item, this line clears the headingInput state variable, resetting the text input field for the user to enter a new todo item heading.
     }
-  }
+  };
+
+
+
 
   return (
     <>
       <div className="todo-container">
-        <h1 className="title">My Todo List</h1>
+        <h1 className="title">React Todo List</h1>
         <div className="input-container">
           <input
             type="text"
@@ -27,23 +30,32 @@ const TodoList = () => {
             onChange={(e) => {setHeadingInput(e.target.value); }}// Add onChange event handler to update headingInput state
             
           />
-          <button className="add-list-button">Add Heading</button>
+          <button className="add-list-button" onClick={handleAddTodo}>Add Heading</button>
         </div>
       </div>
       <div className="todo_main">
-        {todos.map((todo, index) => {// Iterate over each todo item in the todos array
+        {todos.map((todo, index) => (// Iterate over each todo item in the todos array
           <div key={index} className="todo-card">
             <div className="heading-todo">
               {/* Display the heading text of the current todo item*/}
                 <h3>{todo.heading}</h3> {/* Display the heading here */}
+              <div className="add-list">
+                {/* Input field for adding a new item under a specific heading */}
+                <input
+                  type="text"
+                  className="list-input"
+                  placeholder="Add List"
+                  value={listInputs[index] || ''}// Use the value from listInputs array based on the current heading index
+                  onChange={(e) => handleListInputChange(index, e.target.value)}/>
+                   {/* Button to add the list item to the corresponding heading */}
+                  <button className="add-list-button" onClick={() => handleAddList(index)}>Add List</button>
+              </div>
               {/* Button to delete the current heading by passing its index */}
               <button className="delete-button-heading" onClick={() => handeDeleteTodo(index)}>Delete Heading</button>
             </div>
           </div>
-        })}
-        
-      </div>
-        }
+        ))} 
+      </div>  
     </>
   );
 };
